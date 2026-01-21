@@ -1,0 +1,81 @@
+# Production Development Environment Configuration
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  # DataSource configuration for production PostgreSQL
+  datasource:
+    url: jdbc:postgresql://db.[YOUR_PROJECT_REF].supabase.co:5432/postgres
+    username: postgres.[YOUR_PROJECT_REF]
+    password: ${SUPABASE_DB_PASSWORD:O5nleimCSDaG4BWv}  # Use environment variable for security
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      connection-test-query: SELECT 1
+  
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate  # IMPORTANT: Only validate schema, don't auto-update in production
+    properties:
+      hibernate:
+        format_sql: false
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+
+# Production logging configuration
+logging:
+  level:
+    org.hibernate.SQL: WARN
+    com.backend.portfolio: INFO
+    root: INFO
+
+# Application Configuration for Production
+app:
+  name: Portfolio Backend API
+  version: 1.0.0
+  description: Backend APIs for Personal Portfolio Website
+
+# Server Configuration for Production
+server:
+  url: ${SERVER_URL:https://your-production-url.com}
+
+# Swagger Configuration for Production
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true  # Enabled but requires ADMIN authentication
+    tags-sorter: alpha
+    operations-sorter: alpha
+
+# CORS Configuration for Production
+cors:
+  allowed-origins: ${FRONTEND_URL:https://portfolio-frontend.vercel.app}
+
+# Resilience4j Rate Limiter Configuration for production
+resilience4j:
+  ratelimiter:
+    instances:
+      default:
+        limit-for-period: 50
+        limit-refresh-period: 1m
+        timeout-duration: 0s
+      admin:
+        limit-for-period: 30
+        limit-refresh-period: 1m
+        timeout-duration: 0s
+      public:
+        limit-for-period: 60
+        limit-refresh-period: 1m
+        timeout-duration: 0s
+

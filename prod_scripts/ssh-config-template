@@ -1,0 +1,138 @@
+# SSH Configuration Template for Production Access
+# 
+# Copy this to ~/.ssh/config and update with your production server details
+# Usage: cp ssh-config-template ~/.ssh/config (or append to existing config)
+
+# ============================================================================
+# Production Server - Main Access
+# ============================================================================
+Host prod
+    HostName your-production-server.com
+    User your-username
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    ConnectTimeout 10
+    # Compression yes
+
+# ============================================================================
+# Production Server - Kibana Tunnel
+# ============================================================================
+Host prod-kibana
+    HostName your-production-server.com
+    User your-username
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519
+    LocalForward 5601 localhost:5601
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    ConnectTimeout 10
+
+# Usage: ssh prod-kibana
+# Then access Kibana at: http://localhost:5601
+
+# ============================================================================
+# Production Server - Elasticsearch Tunnel (Optional)
+# ============================================================================
+Host prod-elasticsearch
+    HostName your-production-server.com
+    User your-username
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519
+    LocalForward 9200 localhost:9200
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    ConnectTimeout 10
+
+# Usage: ssh prod-elasticsearch
+# Then access Elasticsearch at: http://localhost:9200
+
+# ============================================================================
+# Production Server - All ELK Stack
+# ============================================================================
+Host prod-elk
+    HostName your-production-server.com
+    User your-username
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519
+    LocalForward 5601 localhost:5601   # Kibana
+    LocalForward 9200 localhost:9200   # Elasticsearch
+    LocalForward 9600 localhost:9600   # Logstash
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    ConnectTimeout 10
+
+# Usage: ssh prod-elk
+# Access:
+#   - Kibana: http://localhost:5601
+#   - Elasticsearch: http://localhost:9200
+#   - Logstash: http://localhost:9600
+
+# ============================================================================
+# Production Server - Jump/Bastion Host (if applicable)
+# ============================================================================
+# Host prod-bastion
+#     HostName bastion.your-company.com
+#     User your-username
+#     Port 22
+#     IdentityFile ~/.ssh/id_ed25519
+#     
+# Host prod
+#     HostName your-production-server.com (private IP)
+#     User your-username
+#     Port 22
+#     IdentityFile ~/.ssh/id_ed25519
+#     ProxyJump prod-bastion
+#     ServerAliveInterval 60
+#     ServerAliveCountMax 3
+
+# ============================================================================
+# Configuration Explanation
+# ============================================================================
+#
+# HostName          : Server hostname or IP address
+# User              : SSH username on the server
+# Port              : SSH port (default: 22)
+# IdentityFile      : Path to your private SSH key
+# LocalForward      : Port forwarding (local_port remote_host:remote_port)
+# ServerAliveInterval : Send keepalive message every N seconds
+# ServerAliveCountMax : Max keepalive messages before disconnect
+# ConnectTimeout    : Timeout for connection attempts
+# ProxyJump         : Connect through bastion/jump host
+# Compression       : Enable compression (useful for slow connections)
+#
+# ============================================================================
+# Quick Commands After Setup
+# ============================================================================
+#
+# Connect to production:
+#   ssh prod
+#
+# Access Kibana (creates tunnel):
+#   ssh prod-kibana
+#   # Keep terminal open, access http://localhost:5601
+#
+# Access all ELK stack:
+#   ssh prod-elk
+#   # Keep terminal open, access respective ports
+#
+# View logs:
+#   ssh prod "docker logs -f portfolio-backend-prod"
+#
+# Copy files from production:
+#   scp prod:/path/to/file ~/local/path/
+#
+# ============================================================================
+# Security Notes
+# ============================================================================
+#
+# 1. Keep your SSH keys secure (chmod 600 ~/.ssh/id_ed25519)
+# 2. Use strong passphrase for SSH keys
+# 3. Never share your private keys
+# 4. Rotate SSH keys periodically
+# 5. Use different keys for different environments
+# 6. Enable 2FA on your production server if possible
+#
+# ============================================================================
+

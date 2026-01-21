@@ -1,0 +1,14 @@
+com/backend/portfolio/PortfolioApplicationTests.class
+com/backend/portfolio/services/EducationServiceTest.class
+com/backend/portfolio/services/ExperiencePointServiceTest.class
+com/backend/portfolio/services/AdminUserDetailsServiceTest.class
+com/backend/portfolio/services/ProjectServiceTest.class
+com/backend/portfolio/services/ExperienceServiceTest.class
+com/backend/portfolio/services/ContactServiceTest.class
+com/backend/portfolio/services/TechnologyServiceTest.class
+com/backend/portfolio/services/AddressServiceTest.class
+com/backend/portfolio/services/FaqServiceTest.class
+com/backend/portfolio/services/ProfileServiceTest.class
+com/backend/portfolio/services/ProjectPointServiceTest.class
+com/backend/portfolio/services/AchievementServiceTest.class
+com/backend/portfolio/services/InquireServiceTest.class
