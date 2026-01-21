@@ -7,7 +7,7 @@
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.projects (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255),
     start_date DATE,
     end_date DATE,
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS public.projects (
     github VARCHAR(512),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    profile_id SERIAL NOT NULL,
+    profile_id BIGINT NOT NULL,
     CONSTRAINT fk_projects_profile FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE CASCADE
 );
 
@@ -25,11 +25,11 @@ CREATE TABLE IF NOT EXISTS public.projects (
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.project_points (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     content TEXT,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    project_id SERIAL NOT NULL,
+    project_id BIGINT NOT NULL,
     CONSTRAINT fk_project_points_project FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
 );
 
@@ -38,11 +38,11 @@ CREATE TABLE IF NOT EXISTS public.project_points (
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.projects_technologies (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    project_id SERIAL NOT NULL,
-    technology_id SERIAL NOT NULL,
+    project_id BIGINT NOT NULL,
+    technology_id BIGINT NOT NULL,
     CONSTRAINT fk_proj_tech_project FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
     CONSTRAINT fk_proj_tech_technology FOREIGN KEY (technology_id) REFERENCES technologies(id) ON DELETE CASCADE,
     CONSTRAINT uk_project_technology UNIQUE (project_id, technology_id)

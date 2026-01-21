@@ -8,7 +8,7 @@
 -- Note: proficiency field accepts enum values: Expert, Advanced, Intermediate, Beginner
 
 CREATE TABLE IF NOT EXISTS public.technologies (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     category VARCHAR(255),
     type VARCHAR(16),

@@ -7,7 +7,7 @@
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.experiences (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     company VARCHAR(255),
     position VARCHAR(255),
     start_date DATE,
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS public.experiences (
     github VARCHAR(512),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    profile_id SERIAL NOT NULL,
+    profile_id BIGINT NOT NULL,
     CONSTRAINT fk_experiences_profile FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE CASCADE
 );
 
@@ -27,11 +27,11 @@ CREATE TABLE IF NOT EXISTS public.experiences (
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.experience_points (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     content TEXT,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    experience_id SERIAL NOT NULL,
+    experience_id BIGINT NOT NULL,
     CONSTRAINT fk_experience_points_experience FOREIGN KEY (experience_id) REFERENCES experiences(id) ON DELETE CASCADE
 );
 
@@ -40,11 +40,11 @@ CREATE TABLE IF NOT EXISTS public.experience_points (
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.experiences_technologies (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    experience_id SERIAL NOT NULL,
-    technology_id SERIAL NOT NULL,
+    experience_id BIGINT NOT NULL,
+    technology_id BIGINT NOT NULL,
     CONSTRAINT fk_exp_tech_experience FOREIGN KEY (experience_id) REFERENCES experiences(id) ON DELETE CASCADE,
     CONSTRAINT fk_exp_tech_technology FOREIGN KEY (technology_id) REFERENCES technologies(id) ON DELETE CASCADE,
     CONSTRAINT uk_experience_technology UNIQUE (experience_id, technology_id)

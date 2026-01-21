@@ -7,7 +7,7 @@
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.educations (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     degree VARCHAR(255),
     institution VARCHAR(255),
     field VARCHAR(255),
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS public.educations (
     github VARCHAR(512),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    profile_id SERIAL NOT NULL,
+    profile_id BIGINT NOT NULL,
     CONSTRAINT fk_educations_profile FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE CASCADE
 );
 

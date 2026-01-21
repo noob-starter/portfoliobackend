@@ -7,11 +7,11 @@
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.profiles_technologies (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    profile_id SERIAL NOT NULL,
-    technology_id SERIAL NOT NULL,
+    profile_id BIGINT NOT NULL,
+    technology_id BIGINT NOT NULL,
     CONSTRAINT fk_prof_tech_profile FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE CASCADE,
     CONSTRAINT fk_prof_tech_technology FOREIGN KEY (technology_id) REFERENCES technologies(id) ON DELETE CASCADE,
     CONSTRAINT uk_profile_technology UNIQUE (profile_id, technology_id)

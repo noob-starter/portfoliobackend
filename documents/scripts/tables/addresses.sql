@@ -7,7 +7,7 @@
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.addresses (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     street VARCHAR(255),
     landmark VARCHAR(255),
     city VARCHAR(64),
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS public.addresses (
     url VARCHAR(255),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    profile_id SERIAL NOT NULL,
+    profile_id BIGINT NOT NULL,
     CONSTRAINT fk_addresses_profile FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE CASCADE
 );
 

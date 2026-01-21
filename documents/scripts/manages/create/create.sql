@@ -20,7 +20,7 @@ $$ LANGUAGE plpgsql;
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.profiles (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     fname VARCHAR(255) NOT NULL,
     lname VARCHAR(255) NOT NULL,
     sex VARCHAR(64),
@@ -47,7 +47,7 @@ CREATE TRIGGER update_profiles_updated_at
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.technologies (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     category VARCHAR(255),
     type VARCHAR(16),
@@ -72,7 +72,7 @@ CREATE TRIGGER update_technologies_updated_at
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.addresses (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     street VARCHAR(255),
     landmark VARCHAR(255),
     city VARCHAR(64),
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS public.addresses (
     url VARCHAR(255),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    profile_id SERIAL NOT NULL,
+    profile_id BIGINT NOT NULL,
     CONSTRAINT fk_addresses_profile FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE CASCADE
 );
 
@@ -103,7 +103,7 @@ CREATE TRIGGER update_addresses_updated_at
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.educations (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     degree VARCHAR(255),
     institution VARCHAR(255),
     field VARCHAR(255),
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS public.educations (
     github VARCHAR(512),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    profile_id SERIAL NOT NULL,
+    profile_id BIGINT NOT NULL,
     CONSTRAINT fk_educations_profile FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE CASCADE
 );
 
@@ -134,14 +134,14 @@ CREATE TRIGGER update_educations_updated_at
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.contacts (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     platform VARCHAR(255) NOT NULL,
     url VARCHAR(512),
     description TEXT,
     banner VARCHAR(512),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    profile_id SERIAL NOT NULL,
+    profile_id BIGINT NOT NULL,
     CONSTRAINT fk_contacts_profile FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE CASCADE
 );
 
@@ -158,7 +158,7 @@ CREATE TRIGGER update_contacts_updated_at
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.achievements (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255),
     date_achieved DATE,
     issuer VARCHAR(255),
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS public.achievements (
     github VARCHAR(512),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    profile_id SERIAL NOT NULL,
+    profile_id BIGINT NOT NULL,
     CONSTRAINT fk_achievements_profile FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE CASCADE
 );
 
@@ -186,13 +186,13 @@ CREATE TRIGGER update_achievements_updated_at
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.inquires (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255),
     email VARCHAR(255),
     message TEXT,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    profile_id SERIAL NOT NULL,
+    profile_id BIGINT NOT NULL,
     CONSTRAINT fk_inquires_profile FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE CASCADE
 );
 
@@ -210,7 +210,7 @@ CREATE TRIGGER update_inquires_updated_at
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.experiences (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     company VARCHAR(255),
     position VARCHAR(255),
     start_date DATE NOT NULL,
@@ -221,7 +221,7 @@ CREATE TABLE IF NOT EXISTS public.experiences (
     github VARCHAR(512),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    profile_id SERIAL NOT NULL,
+    profile_id BIGINT NOT NULL,
     CONSTRAINT fk_experiences_profile FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE CASCADE
 );
 
@@ -239,11 +239,11 @@ CREATE TRIGGER update_experiences_updated_at
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.experience_points (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     content TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    experience_id SERIAL NOT NULL,
+    experience_id BIGINT NOT NULL,
     CONSTRAINT fk_experience_points_experience FOREIGN KEY (experience_id) REFERENCES experiences(id) ON DELETE CASCADE
 );
 
@@ -260,7 +260,7 @@ CREATE TRIGGER update_experience_points_updated_at
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.projects (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     start_date DATE,
     end_date DATE,
@@ -269,7 +269,7 @@ CREATE TABLE IF NOT EXISTS public.projects (
     github VARCHAR(512),
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    profile_id SERIAL NOT NULL,
+    profile_id BIGINT NOT NULL,
     CONSTRAINT fk_projects_profile FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE CASCADE
 );
 
@@ -287,11 +287,11 @@ CREATE TRIGGER update_projects_updated_at
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.project_points (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     content TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    project_id SERIAL NOT NULL,
+    project_id BIGINT NOT NULL,
     CONSTRAINT fk_project_points_project FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
 );
 
@@ -308,12 +308,12 @@ CREATE TRIGGER update_project_points_updated_at
 -- =====================================================
 
 CREATE TABLE IF NOT EXISTS public.faqs (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     question TEXT NOT NULL,
     answer TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    profile_id SERIAL NOT NULL,
+    profile_id BIGINT NOT NULL,
     CONSTRAINT fk_faqs_profile FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE CASCADE
 );
 
@@ -331,11 +331,11 @@ CREATE TRIGGER update_faqs_updated_at
 
 -- Profiles <-> Technologies
 CREATE TABLE IF NOT EXISTS public.profiles_technologies (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    profile_id SERIAL NOT NULL,
-    technology_id SERIAL NOT NULL,
+    profile_id BIGINT NOT NULL,
+    technology_id BIGINT NOT NULL,
     CONSTRAINT fk_prof_tech_profile FOREIGN KEY (profile_id) REFERENCES profiles(id) ON DELETE CASCADE,
     CONSTRAINT fk_prof_tech_technology FOREIGN KEY (technology_id) REFERENCES technologies(id) ON DELETE CASCADE,
     CONSTRAINT uk_profile_technology UNIQUE (profile_id, technology_id)
@@ -351,11 +351,11 @@ CREATE TRIGGER update_profiles_technologies_updated_at
 
 -- Experiences <-> Technologies
 CREATE TABLE IF NOT EXISTS public.experiences_technologies (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    experience_id SERIAL NOT NULL,
-    technology_id SERIAL NOT NULL,
+    experience_id BIGINT NOT NULL,
+    technology_id BIGINT NOT NULL,
     CONSTRAINT fk_exp_tech_experience FOREIGN KEY (experience_id) REFERENCES experiences(id) ON DELETE CASCADE,
     CONSTRAINT fk_exp_tech_technology FOREIGN KEY (technology_id) REFERENCES technologies(id) ON DELETE CASCADE,
     CONSTRAINT uk_experience_technology UNIQUE (experience_id, technology_id)
@@ -371,11 +371,11 @@ CREATE TRIGGER update_experiences_technologies_updated_at
 
 -- Projects <-> Technologies
 CREATE TABLE IF NOT EXISTS public.projects_technologies (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    project_id SERIAL NOT NULL,
-    technology_id SERIAL NOT NULL,
+    project_id BIGINT NOT NULL,
+    technology_id BIGINT NOT NULL,
     CONSTRAINT fk_proj_tech_project FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
     CONSTRAINT fk_proj_tech_technology FOREIGN KEY (technology_id) REFERENCES technologies(id) ON DELETE CASCADE,
     CONSTRAINT uk_project_technology UNIQUE (project_id, technology_id)
