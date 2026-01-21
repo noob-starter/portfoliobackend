@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS public.addresses (
     city VARCHAR(64),
     state VARCHAR(64),
     country VARCHAR(64),
-    pincode NUMERIC,
+    pincode INTEGER,
     type VARCHAR(64),
     phone VARCHAR(16),
     email VARCHAR(255),
