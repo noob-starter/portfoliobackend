@@ -13,7 +13,7 @@
 - [ ] 🔒 Security update
 
 ### SHORT SUMMARY
-_Please add a short summary explaining your changes if not obvious from the PR title and JIRA ticket title._
+_Please add a short summary explaining your changes._
 
 ### REVIEWERS
-@noob-starter
+@noob-starter @pratik-wbd
