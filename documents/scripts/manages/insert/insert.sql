@@ -265,12 +265,29 @@ VALUES
 -- Experiences_Technologies Table
 INSERT INTO experiences_technologies (experience_id, technology_id)
 VALUES
-    (1, 1);
+    (1, 1),
+    (1, 7),
+    (1, 8),
+    (1, 11),
+    (1, 12),
+    (1, 13),
+    (1, 14),
+    (1, 15),
+    (1, 16),
+    (1, 18),
+    (1, 22),
+    (1, 23),
+    (1, 24);
 
 -- Projects_Technologies Table
 INSERT INTO projects_technologies (project_id, technology_id)
 VALUES
-    (1, 1);
+    (1, 2),
+    (2, 2),
+    (3, 4),
+    (3, 5),
+    (3, 6),
+    (3, 7);
 
 -- FAQs Table
 INSERT INTO faqs (question, answer, profile_id)
