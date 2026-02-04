@@ -1,0 +1,26 @@
+name: Enforce Proper PR Title Format
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  validate-pr-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR title format
+        run: |
+          title="${{ github.event.pull_request.title }}"
+          echo "🔍 Checking PR title: $title"
+
+          regex="^(build|chore|ci|docs|feat!?|fix|perf|refactor|style|test): [A-Z].+$"
+
+          if [[ ! "$title" =~ $regex ]]; then
+            echo "❌ Pull Request title does not match the expected format."
+            echo "✅ Expected examples:"
+            echo "   feat: Add support for dark mode"
+            echo "   fix: Fix null pointer on login"
+            echo "   feat!: Remove legacy billing endpoint"
+            exit 1
+          fi

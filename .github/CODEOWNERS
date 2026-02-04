@@ -1,0 +1,29 @@
+# CODEOWNERS file
+# These owners will be the default owners for everything in the repo.
+# Unless a later match takes precedence, these owners will be requested for
+# review when someone opens a pull request.
+
+# Default owners for everything in the repository
+* @noob-starter
+
+# Backend Java code
+/portfolio/src/main/java/com/backend/portfolio/ @noob-starter
+
+# Configuration files
+/portfolio/src/main/resources/ @noob-starter
+*.yml @noob-starter
+*.yaml @noob-starter
+
+# Docker and deployment
+/portfolio/docker-compose*.yml @noob-starter
+/portfolio/Dockerfile @noob-starter
+/prod_scripts/ @noob-starter
+
+# Database scripts
+/portfolio/documents/scripts/ @noob-starter
+
+# Security configuration
+/portfolio/src/main/java/com/backend/portfolio/configurations/SecurityConfig.java @noob-starter
+
+# Dependencies
+/portfolio/pom.xml @noob-starter
