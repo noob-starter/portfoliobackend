@@ -1,0 +1,5 @@
+# This file defines code owners who are automatically requested for review
+# when a pull request is opened.
+
+# Default owners for everything in the repo
+*       @noob-starter @pratik-wbd
